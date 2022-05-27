@@ -1,12 +1,15 @@
 #find number combination with greatest value while allowed to swap digits with equal parity
+
+#main program
 def maxNum(usrAns):
  
     oddNum = 9
     evenNum = 8
         
-    #make string into list
+    #make string into array
     usrInpt = mkary(usrAns)
     
+    #check array for 9's & 8's, then 7's & 6's ... 3's &2's. Note: not 1's & 0's for they are the smallest
     while oddNum > 1:
         
         #test
@@ -17,6 +20,7 @@ def maxNum(usrAns):
         #generate greatest value according to the rules - type array
         usrInpt = biggestDigit(usrInpt, oddNum, evenNum)
         
+        #decrease 9 & 8 to 7 & 6 and so on
         oddNum = oddNum - 1
         evenNum = evenNum - 1
     
@@ -50,15 +54,16 @@ def mkary(usrAns):
         
 
 
-#find from 9 & 8 to 3 & 2 and swap with a smaller number at the earlier index in the array if it exists - skip 1 & 0 for already smallest
+#find from 9 & 8 to 3 & 2 and swap with a smaller number at an earlier index in the array if it exists - skip 1 & 0 for already smallest
 def biggestDigit(usrInpt, oddNum, evenNum):
 
-    #find 9 or 8
+    #position counter for the current number being looked for
     i = 0
     
     #test
     #print ("in biggestDigit")
-
+    
+    #iterate to look for current oddNum and evenNum
     while i < len(usrInpt):
     
         #test
@@ -69,14 +74,16 @@ def biggestDigit(usrInpt, oddNum, evenNum):
         #print (oddTF)
         #print (evenTF)
 
-        #if found 9 or 8
+        #if found current oddNum or evenNum
         if usrInpt[i] == oddNum or usrInpt[i] == evenNum:    
             
+            #position counter for numbers to swap with oddNum or evenNum
             ii = 0
             
             #test
             #print (usrInpt)
-
+            
+            #iterate before position i
             while ii < i:
                 
                 #test
@@ -85,6 +92,7 @@ def biggestDigit(usrInpt, oddNum, evenNum):
 
                 #find 1st smaller digit with same parity
                 if  usrInpt[ii] < usrInpt[i] and usrInpt[ii] % 2 == usrInpt[i] % 2:
+                    #swap the numbers' position
                     tempNum = usrInpt[ii]
                     usrInpt[ii] = usrInpt[i]
                     usrInpt[i] = tempNum
